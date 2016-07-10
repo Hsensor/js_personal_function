@@ -20,6 +20,13 @@ jQuery.fn = jQuery.prototype = {
 		// Return the newly-formed element set
 		return ret;
 	},
+	//map的callback 一定要有返回值
+	//$("li").map(function(i,elem){//this===elem})
+	map: function( callback ) {
+		return this.pushStack( jQuery.map(this, function( elem, i ) {
+			return callback.call( elem, i, elem );
+		}));
+	},
 }
 
 jQuery.extend = jQuery.fn.extend = function() {
@@ -106,5 +113,38 @@ jQuery.extend( {
 		first.length = i;
 		
 		return first;
-	}
+	},
+	// arg is for internal usage only
+	//$.map(elems,callback,arg); callback 要有return 返回值
+	map: function( elems, callback, arg ) {
+		var value,
+			i = 0,
+			length = elems.length,
+			isArray = isArraylike( elems ),
+			ret = [];
+
+		// Go through the array, translating each of the items to their new values
+		if ( isArray ) {
+			for ( ; i < length; i++ ) {
+				value = callback( elems[ i ], i, arg );
+
+				if ( value != null ) {
+					ret.push( value );
+				}
+			}
+
+		// Go through every key on the object,
+		} else {
+			for ( i in elems ) {
+				value = callback( elems[ i ], i, arg );
+
+				if ( value != null ) {
+					ret.push( value );
+				}
+			}
+		}
+
+		// Flatten any nested arrays
+		return concat.apply( [], ret );
+	},
 } )
