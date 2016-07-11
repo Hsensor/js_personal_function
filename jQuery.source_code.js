@@ -1,8 +1,15 @@
+jQuery = function( selector, context ) {
+
+	// The jQuery object is actually just the init constructor 'enhanced'
+	// Need init if jQuery is called (just allow error to be thrown if not included)
+	return new jQuery.fn.init( selector, context );
+}
+
 jQuery.fn = jQuery.prototype = {
 	eq: function( i ) {
 		var len = this.length,
 			j = +i + ( i < 0 ? len : 0 );//处理i是负数的情况
-			//j>=0&&j<len 确认j必须落在[0,len)中,j>=0是为了确认这里的i是负数|-i|>len
+			//j>=0&&j<len 确认j必须落在[0,len)中,j>=0是为了确认这里的i是负数时|-i|<len
 			//返回一个新的jQuery 实例，并将this加入栈中 ret.prevObject = this,ret.context = this.context;
 		return this.pushStack( j >= 0 && j < len ? [ this[ j ] ] : [] );
 	},
@@ -104,7 +111,7 @@ jQuery.extend( {
 
 		//修改first.length属性
 		first.length = i;
-		
+
 		return first;
 	}
 } )
