@@ -6,6 +6,16 @@ jQuery = function( selector, context ) {
 }
 
 jQuery.fn = jQuery.prototype = {
+	//获取原生dom对象
+	get: function( num ) {
+		return num != null ?
+
+			// Return just the one element from the set
+			( num < 0 ? this[ num + this.length ] : this[ num ] ) :
+
+			// Return all the elements in a clean array
+			slice.call( this );
+	},
 	eq: function( i ) {
 		var len = this.length,
 			j = +i + ( i < 0 ? len : 0 );//处理i是负数的情况
