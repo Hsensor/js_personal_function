@@ -23,6 +23,7 @@ function test(){
 	var rest = fns.slice(0,-1);
 	return function(){
 		return rest.reduceRight(function(composed,fn){
+			console.log("fn",fn.name)
 			return fn(composed)
 		},last.apply(undefined,arguments));
 	}

@@ -12,6 +12,12 @@ function test(){
         next();
       }
     },
+    function haha(next){
+      return function hahaT(){
+        console.log("hahaT");
+        next();
+      }
+    },
     function createLoger(next){
       return function logger(){
         console.log('logger')
@@ -19,24 +25,20 @@ function test(){
       }
     }
   ]; 
-  /*var last = fns[fns.length-1];
-  var rest = fns.slice(0,-1);
-  return rest.reduceRight(function(composed,fn){
-    return fn(composed)
-  },last())*/
-  
-
   return fns.reduce(function (a, b) {
+    console.log("a",a.toString());
     return function () {
       return a(b.apply(undefined,arguments));
     }
   })
 }
 
+//第一次a thunk
+//后面的a一直就是function(){return a(b.apply(undefined,arguments))}
+//这尼玛就是一个递归调用
 var firstFn = test()(function(){
   console.log("store.dispatch");
 });
 
-console.log(firstFn)
-
+console.log("start ....")
 firstFn();
