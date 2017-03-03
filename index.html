@@ -57,7 +57,7 @@
 * conversion(1024*1024*1024,{needNotUnit:false,startUnit:"KB",endUnit:"GB"}) =>1024GB
 * conversion(1024*1024,{needNotUnit:true,startUnit:"GB",endUnit:"MB"}) => 1073741824
 */
-function conversion(byteSize,opt){
+/*function conversion(byteSize,opt){
     opt = opt||{};
     if(!byteSize){
         return 0;
@@ -118,7 +118,36 @@ console.log(conversion(1024*1024*1024,{startUnit:"KB"}));
 console.log(conversion(1024*1024*1024,{startUnit:"KB",endUnit:"GB"}));
 console.log(conversion(1024*1024*1024,{needNotUnit:false,startUnit:"KB",endUnit:"GB"}));
 console.log(conversion(1024*1024,{needNotUnit:true,startUnit:"GB",endUnit:"MB"}));
-console.log(conversion(1024*1024*1024,{needNotUnit:false,endUnit:"GB"}));
+console.log(conversion(1024*1024*1024,{needNotUnit:false,endUnit:"GB"}));*/
+
+function tco(f) {
+  var value;
+  var active = false;
+  var accumulated = [];
+
+  return function accumulator() {
+    accumulated.push(arguments);
+    if (!active) {
+      active = true;
+      while (accumulated.length) {
+        value = f.apply(this, accumulated.shift());
+      }
+      active = false;
+      return value;
+    }
+  };
+}
+
+var sum = tco(function(x, y) {
+  if (y > 0) {
+    return sum(x + 1, y - 1)
+  }
+  else {
+    return x
+  }
+});
+
+sum(1, 100000)
 </script>
 </body>
 </html>
