@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .clearfix {
+            box-sizing: border-box;
+            overflow: hidden;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .clearfix:before,.clearfix:after {
+            content: '';
+            clear: both;
+        }
+        .col-xs-3 {
+            float: left;
+            width: 25%;
+            border: 1px solid #ccc;
+            background: #fff;
+            height: 100px;
+            margin: -1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clearfix">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+    </div>
+</body>
+</html>
