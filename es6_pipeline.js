@@ -8,7 +8,7 @@ const addThenMult = pipeline(plus1, mult2);
 addThenMult(5)
 
 
-/*function pipeLine(){
+function pipeLine(){
 	var funs = [].slice.apply(arguments);
 
 	return function(val){
@@ -16,4 +16,12 @@ addThenMult(5)
 			return b(a);
 		},val)
 	}
-}*/
+}
+
+function plus(a){
+  return a+1;
+}
+
+[1,2,3].reduce(function(a,b){
+  return a*b;
+},5)

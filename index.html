@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script type="text/javascript" src="./debounce.js"></script>
+    <!--<script type="text/javascript" src="./debounce.js"></script>
     <script type="text/javascript" src="./bandExchange.js"></script>
     <script type="text/javascript" src="sort.js"></script>
-    <script type="text/javascript" src="combination_permutation.js"></script>
+    <script type="text/javascript" src="combination_permutation.js"></script>-->
 </head>
 <body>
     <input type="text" id="input">
-    <script type="text/javascript">
+<script type="text/javascript">
     /*var arr = [1,3,5,2,4,7,8];
     console.log(arr.insertionSort(function(a,b){
         return a - b;
@@ -32,7 +32,7 @@
         return a-b;
     }))*/
 
-    var arr = [1,2,4,4,5,6];
+    /*var arr = [1,2,4,4,5,6];
     console.log(arr.combination(3));
     console.log(arr);
     var arr = [1,2,4,4,5,6];
@@ -42,8 +42,112 @@
     document.getElementById("input").onkeydown = throttle(fn,500,{leading:false});
     function fn(e){
         console.log(e.target.value);
+    }*/
+
+/**
+* byteSize number required
+* opt  {}    options
+* startUnit BYTE
+* use like this 
+* conversion(1024*1024*1024) =>1GB
+* conversion(1024*1024*1024,{endUnit:"GB"}) =>1024*1024GB
+* conversion(1024*1024*1024,{startUnit:"KB"}) =>1TB
+* conversion(1024*1024*1024,{startUnit:"KB",endUnit:"GB"}) =>1024*1024GB
+* conversion(1024*1024*1024,{needNotUnit:false,endUnit:"GB"}) =>1GB
+* conversion(1024*1024*1024,{needNotUnit:false,startUnit:"KB",endUnit:"GB"}) =>1024GB
+* conversion(1024*1024,{needNotUnit:true,startUnit:"GB",endUnit:"MB"}) => 1073741824
+*/
+/*function conversion(byteSize,opt){
+    opt = opt||{};
+    if(!byteSize){
+        return 0;
     }
+    var unit = ["BYTE","KB","MB","GB","TB"];
+    var start = 0,end = unit.length-1;
+
     
-    </script>
+    if(opt.startUnit){
+        start = unit.indexOf(opt.startUnit.toUpperCase());
+    }
+    if(opt.endUnit){
+        end = unit.indexOf(opt.endUnit.toUpperCase());
+    }
+
+    var resultSize = unit_conversion(byteSize, opt, start, end);
+
+    if(!opt.needNotUnit){
+        if(typeof opt.decimalCount !=="undefined"){
+            return resultSize.size.toFixed(opt.decimalCount) + unit[resultSize.unit];
+        }else{
+            return resultSize.size + unit[resultSize.unit];
+        }
+    }else{
+        if(typeof opt.decimalCount!=="undefined"){
+            return resultSize.size.toFixed(opt.decimalCount);
+        }else{
+            return resultSize.size;
+        }
+    }
+}
+
+function unit_conversion(byteSize, opt, start, end){
+    //10 byte--->mb
+    if (opt.endUnit && start < end) {
+        start++;
+        byteSize = byteSize / 1024;
+        return unit_conversion(byteSize, opt, start, end)
+    }
+
+    if (opt.startUnit && opt.endUnit && start > end) {
+        start--;
+        byteSize = byteSize * 1024;
+        return unit_conversion(byteSize, opt, start, end);
+    }
+
+    if (byteSize >= 1024 && start < end) {
+        start++;
+        byteSize = byteSize / 1024;
+        return unit_conversion(byteSize, opt, start, end) //arguments.callee(byteSize);
+    }
+
+    return {size:Number(byteSize),unit:start};
+}
+console.log(conversion(1024*1024*1024))
+console.log(conversion(1024*1024*1024,{endUnit:"GB"}));
+console.log(conversion(1024*1024*1024,{startUnit:"KB"}));
+console.log(conversion(1024*1024*1024,{startUnit:"KB",endUnit:"GB"}));
+console.log(conversion(1024*1024*1024,{needNotUnit:false,startUnit:"KB",endUnit:"GB"}));
+console.log(conversion(1024*1024,{needNotUnit:true,startUnit:"GB",endUnit:"MB"}));
+console.log(conversion(1024*1024*1024,{needNotUnit:false,endUnit:"GB"}));*/
+
+function tco(f) {
+  var value;
+  var active = false;
+  var accumulated = [];
+
+  return function accumulator() {
+    accumulated.push(arguments);
+    if (!active) {
+      active = true;
+      while (accumulated.length) {
+        value = f.apply(this, accumulated.shift());
+      }
+      active = false;
+      return value;
+    }
+  };
+}
+
+var sum = tco(function(x, y) {
+  if (y > 0) {
+    return sum(x + 1, y - 1)
+  }
+  else {
+    return x
+  }
+});
+
+sum(1, 100000)
+</script>
 </body>
 </html>
