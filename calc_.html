@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        :root,html { font-size: .875rem } 
+        @media screen and (min-width: 20rem) { 
+            :root,html { 
+                font-size:calc(.875rem + .25 * (100vw - 20rem) / 100) 
+            } 
+        }
+
+        @media screen and (min-width: 120rem) { 
+            :root,html { font-size:1.125rem } 
+        }
+
+        body { font-size: 1.5rem; }
+    
+        .xxx {
+            width: 10rem;
+            background-color: red;
+            height: 10rem;
+        }
+    </style>
+</head>
+<body>
+<div class="tt">
+
+    640px 
+    <div class="showFont">
+        
+    </div>
+    <div class="xxx">
+        
+    </div>
+    Hello html
+</div>
+<script type="text/javascript">
+    var oShowFont = document.getElementsByClassName('showFont')[0];
+    oShowFont.innerHTML = (0.875+0.25*(window.innerWidth/16-20)/100)*16*1.5+"px";
+    window.onresize = function(){
+        oShowFont.innerHTML = (0.875+0.25*(window.innerWidth/16-20)/100)*16*1.5+"px";
+    }
+</script>
+</body>
+</html>
