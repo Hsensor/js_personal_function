@@ -7,11 +7,15 @@
         body {
             padding: 0;
             margin: 0;
-            background: red;
         }
         .clearfix {
             background: green;
             overflow: hidden;
+            _border: 1px solid red;
+            _box-sizing: border-box;
+            border-top: 1px solid red;
+            border-bottom: 1px solid red;
+
         }
         .clearfix:before,.clearfix:after {
             content: '';
@@ -30,16 +34,16 @@
 </head>
 <body>
     <div class="clearfix">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
+        <div class="col-xs-3">1</div>
+        <div class="col-xs-3">2</div>
+        <div class="col-xs-3">3</div>
+        <div class="col-xs-3">4</div>
+        <div class="col-xs-3">5</div>
+        <div class="col-xs-3">6</div>
+        <div class="col-xs-3">7</div>
+        <div class="col-xs-3">8</div>
+        <div class="col-xs-3">9</div>
+        <div class="col-xs-3">0</div>
     </div>
 </body>
 </html>
