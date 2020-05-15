@@ -48,9 +48,4 @@ function breadthRecursionDir(dir){
 		}
 	}
 	return result;
-console.log('xxxxx')
 }
-
-console.log('sb')
-
-
